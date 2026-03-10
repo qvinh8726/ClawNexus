@@ -1,0 +1,348 @@
+// ClawAI Gateway - Database Schema
+// Production-grade Prisma schema for AI Gateway platform
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// User Management
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String?
+  role          UserRole  @default(USER)
+  apiKey        String?   @unique
+  apiKeyHash    String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  lastLoginAt   DateTime?
+
+  // Relations
+  providers     Provider[]
+  requestLogs   RequestLog[]
+  usageMetrics  UsageMetric[]
+  routingRules  RoutingRule[]
+  refreshTokens RefreshToken[]
+
+  @@index([email])
+  @@index([apiKeyHash])
+  @@map("users")
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([token])
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+  VIEWER
+}
+
+// ============================================
+// Provider Management
+// ============================================
+
+model Provider {
+  id          String         @id @default(cuid())
+  userId      String
+  name        String
+  type        ProviderType
+  baseUrl     String?
+  status      ProviderStatus @default(ACTIVE)
+  isDefault   Boolean        @default(false)
+  config      Json?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  keys        ProviderKey[]
+  requestLogs RequestLog[]
+  usageMetrics UsageMetric[]
+  routingRuleProviders RoutingRuleProvider[]
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@map("providers")
+}
+
+model ProviderKey {
+  id               String           @id @default(cuid())
+  providerId       String
+  keyAlias         String
+  encryptedKey     String
+  keyPrefix        String?          // First few chars for identification
+  status           KeyStatus        @default(ACTIVE)
+  lastUsedAt       DateTime?
+  rateLimitResetAt DateTime?
+  usageCount       Int              @default(0)
+  dailyUsageCount  Int              @default(0)
+  dailyLimit       Int?
+  monthlyLimit     Int?
+  monthlyUsageCount Int             @default(0)
+  lastResetDaily   DateTime         @default(now())
+  lastResetMonthly DateTime         @default(now())
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  // Relations
+  provider    Provider      @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  requestLogs RequestLog[]
+
+  @@unique([providerId, keyAlias])
+  @@index([providerId])
+  @@index([status])
+  @@map("provider_keys")
+}
+
+enum ProviderType {
+  OPENAI
+  ANTHROPIC
+  GEMINI
+  OPENAI_COMPATIBLE
+}
+
+enum ProviderStatus {
+  ACTIVE
+  INACTIVE
+  ERROR
+  RATE_LIMITED
+}
+
+enum KeyStatus {
+  ACTIVE
+  INACTIVE
+  RATE_LIMITED
+  EXHAUSTED
+}
+
+// ============================================
+// Routing Configuration
+// ============================================
+
+model RoutingRule {
+  id              String              @id @default(cuid())
+  userId          String
+  name            String
+  description     String?
+  modelPattern    String              // Pattern to match (e.g., "smart", "cheap", "*")
+  strategy        RoutingStrategy     @default(PRIORITY)
+  fallbackEnabled Boolean             @default(true)
+  retryCount      Int                 @default(2)
+  isActive        Boolean             @default(true)
+  priority        Int                 @default(0)
+  conditions      Json?               // JSON array of conditions
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  // Relations
+  user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  providers RoutingRuleProvider[]
+
+  @@unique([userId, name])
+  @@index([userId])
+  @@index([modelPattern])
+  @@index([isActive])
+  @@map("routing_rules")
+}
+
+model RoutingRuleProvider {
+  id         String @id @default(cuid())
+  ruleId     String
+  providerId String
+  modelId    String
+  weight     Int    @default(1)
+  priority   Int    @default(0)
+
+  // Relations
+  rule     RoutingRule @relation(fields: [ruleId], references: [id], onDelete: Cascade)
+  provider Provider    @relation(fields: [providerId], references: [id], onDelete: Cascade)
+
+  @@unique([ruleId, providerId, modelId])
+  @@index([ruleId])
+  @@map("routing_rule_providers")
+}
+
+enum RoutingStrategy {
+  ROUND_ROBIN
+  LEAST_LATENCY
+  LEAST_COST
+  PRIORITY
+  RANDOM
+  WEIGHTED
+}
+
+// ============================================
+// Request Logging
+// ============================================
+
+model RequestLog {
+  id             String        @id @default(cuid())
+  userId         String?
+  providerId     String
+  providerKeyId  String?
+  model          String
+  requestedModel String
+  inputTokens    Int
+  outputTokens   Int
+  totalTokens    Int
+  latencyMs      Int
+  cost           Decimal       @db.Decimal(10, 6)
+  status         RequestStatus
+  errorMessage   String?
+  errorCode      String?
+  cached         Boolean       @default(false)
+  streamMode     Boolean       @default(false)
+  timestamp      DateTime      @default(now())
+  metadata       Json?
+
+  // Relations
+  user        User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+  provider    Provider     @relation(fields: [providerId], references: [id], onDelete: Cascade)
+  providerKey ProviderKey? @relation(fields: [providerKeyId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([providerId])
+  @@index([timestamp])
+  @@index([status])
+  @@index([model])
+  @@map("request_logs")
+}
+
+enum RequestStatus {
+  PENDING
+  SUCCESS
+  ERROR
+  TIMEOUT
+  RATE_LIMITED
+}
+
+// ============================================
+// Usage Metrics (Aggregated)
+// ============================================
+
+model UsageMetric {
+  id                 String        @id @default(cuid())
+  userId             String?
+  providerId         String?
+  period             MetricPeriod
+  periodStart        DateTime
+  periodEnd          DateTime
+  totalRequests      Int           @default(0)
+  successfulRequests Int           @default(0)
+  failedRequests     Int           @default(0)
+  inputTokens        BigInt        @default(0)
+  outputTokens       BigInt        @default(0)
+  totalTokens        BigInt        @default(0)
+  totalCost          Decimal       @db.Decimal(12, 6) @default(0)
+  avgLatencyMs       Int           @default(0)
+  p50LatencyMs       Int           @default(0)
+  p95LatencyMs       Int           @default(0)
+  p99LatencyMs       Int           @default(0)
+  cacheHits          Int           @default(0)
+  cacheMisses        Int           @default(0)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  // Relations
+  user     User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  provider Provider? @relation(fields: [providerId], references: [id], onDelete: SetNull)
+
+  @@unique([userId, providerId, period, periodStart])
+  @@index([userId])
+  @@index([providerId])
+  @@index([period])
+  @@index([periodStart])
+  @@map("usage_metrics")
+}
+
+enum MetricPeriod {
+  HOURLY
+  DAILY
+  WEEKLY
+  MONTHLY
+}
+
+// ============================================
+// Model Configuration
+// ============================================
+
+model ModelConfig {
+  id                    String   @id @default(cuid())
+  providerId            String?
+  modelId               String   @unique
+  displayName           String
+  providerType          ProviderType
+  contextWindow         Int
+  inputCostPer1kTokens  Decimal  @db.Decimal(10, 6)
+  outputCostPer1kTokens Decimal  @db.Decimal(10, 6)
+  maxOutputTokens       Int?
+  supportsStreaming     Boolean  @default(true)
+  supportsVision        Boolean  @default(false)
+  supportsFunctionCalling Boolean @default(false)
+  capabilities          Json?
+  isActive              Boolean  @default(true)
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  @@index([providerType])
+  @@index([isActive])
+  @@map("model_configs")
+}
+
+// ============================================
+// Request Cache
+// ============================================
+
+model RequestCache {
+  id           String   @id @default(cuid())
+  cacheKey     String   @unique
+  requestHash  String
+  model        String
+  response     Json
+  inputTokens  Int
+  outputTokens Int
+  expiresAt    DateTime
+  hitCount     Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  @@index([cacheKey])
+  @@index([expiresAt])
+  @@map("request_cache")
+}
+
+// ============================================
+// System Configuration
+// ============================================
+
+model SystemConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     Json
+  updatedAt DateTime @updatedAt
+
+  @@map("system_config")
+}
