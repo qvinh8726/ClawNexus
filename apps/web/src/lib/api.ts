@@ -35,10 +35,10 @@ export default api;
 // Auth
 export const auth = {
   login: (data: { email: string; password: string }) =>
-    api.post('/api/auth/login', data),
+    api.post('/auth/login', data),
   register: (data: { email: string; password: string; name: string }) =>
-    api.post('/api/auth/register', data),
-  me: () => api.get('/api/auth/me'),
+    api.post('/auth/register', data),
+  me: () => api.get('/auth/me'),
 };
 
 // Providers

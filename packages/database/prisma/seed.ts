@@ -4,8 +4,9 @@
  */
 
 import { PrismaClient } from '@prisma/client';
-import { scryptSync: hashPassword } from 'crypto';
+import { scryptSync } from 'crypto';
 
+const hashPassword = scryptSync;
 const prisma = new PrismaClient();
 
 const MODEL_CONFIGS = [

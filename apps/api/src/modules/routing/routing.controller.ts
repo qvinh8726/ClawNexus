@@ -17,9 +17,9 @@ import { RoutingService } from './routing.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 class CreateRoutingRuleDto {
-  name: string;
-  providerId: string;
-  modelPattern: string;
+  name!: string;
+  providerId!: string;
+  modelPattern!: string;
   targetModel?: string;
   strategy?: string;
   priority?: number;
@@ -39,9 +39,9 @@ class UpdateRoutingRuleDto {
 }
 
 class CreateModelAliasDto {
-  alias: string;
-  providerId: string;
-  targetModel: string;
+  alias!: string;
+  providerId!: string;
+  targetModel!: string;
   description?: string;
 }
 

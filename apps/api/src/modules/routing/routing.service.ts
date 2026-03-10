@@ -13,8 +13,12 @@ export class RoutingService {
     return this.prisma.routingRule.findMany({
       where: { userId },
       include: {
-        provider: {
-          select: { id: true, name: true, type: true },
+        providers: {
+          include: {
+            provider: {
+              select: { id: true, name: true, type: true },
+            },
+          },
         },
       },
       orderBy: { priority: 'desc' },
@@ -25,8 +29,12 @@ export class RoutingService {
     const rule = await this.prisma.routingRule.findFirst({
       where: { id, userId },
       include: {
-        provider: {
-          select: { id: true, name: true, type: true },
+        providers: {
+          include: {
+            provider: {
+              select: { id: true, name: true, type: true },
+            },
+          },
         },
       },
     });
@@ -63,12 +71,26 @@ export class RoutingService {
     return this.prisma.routingRule.create({
       data: {
         userId,
-        ...data,
+        name: data.name,
+        modelPattern: data.modelPattern,
+        strategy: data.strategy as any,
+        priority: data.priority,
         conditions: data.conditions as any,
+        isActive: data.isActive,
+        providers: {
+          create: {
+            providerId: data.providerId,
+            modelId: data.targetModel || data.modelPattern,
+          },
+        },
       },
       include: {
-        provider: {
-          select: { id: true, name: true, type: true },
+        providers: {
+          include: {
+            provider: {
+              select: { id: true, name: true, type: true },
+            },
+          },
         },
       },
     });
@@ -102,10 +124,21 @@ export class RoutingService {
 
     return this.prisma.routingRule.update({
       where: { id },
-      data: data as any,
+      data: {
+        name: data.name,
+        modelPattern: data.modelPattern,
+        strategy: data.strategy as any,
+        priority: data.priority,
+        conditions: data.conditions as any,
+        isActive: data.isActive,
+      },
       include: {
-        provider: {
-          select: { id: true, name: true, type: true },
+        providers: {
+          include: {
+            provider: {
+              select: { id: true, name: true, type: true },
+            },
+          },
         },
       },
     });

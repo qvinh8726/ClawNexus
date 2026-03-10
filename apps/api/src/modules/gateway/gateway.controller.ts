@@ -30,10 +30,10 @@ import { ApiKeyGuard } from '../auth/guards/api-key.guard';
 
 class ChatMessageDto {
   @IsString()
-  role: 'system' | 'user' | 'assistant';
+  role!: 'system' | 'user' | 'assistant';
 
   @IsString()
-  content: string;
+  content!: string;
 
   @IsString()
   @IsOptional()
@@ -42,12 +42,12 @@ class ChatMessageDto {
 
 class ChatCompletionRequestDto {
   @IsString()
-  model: string;
+  model!: string;
 
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ChatMessageDto)
-  messages: ChatMessageDto[];
+  messages!: ChatMessageDto[];
 
   @IsNumber()
   @IsOptional()

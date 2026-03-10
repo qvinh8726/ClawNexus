@@ -5,8 +5,6 @@
 
 import type {
   ChatCompletionRequest,
-  ChatCompletionResponse,
-  ChatCompletionChunk,
   ProviderType,
 } from '@clawai/shared-types';
 

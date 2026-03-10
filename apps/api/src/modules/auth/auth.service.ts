@@ -45,9 +45,6 @@ export class AuthService {
   }
 
   async validateApiKey(apiKey: string): Promise<User | null> {
-    // Hash the API key for comparison
-    const hash = await bcrypt.hash(apiKey, 10);
-
     const user = await this.prisma.user.findFirst({
       where: {
         apiKey,
@@ -164,6 +161,28 @@ export class AuthService {
     });
 
     return apiKey;
+  }
+
+  async getProfile(userId: string): Promise<Partial<User>> {
+    const user = await this.prisma.user.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        role: true,
+        apiKey: true,
+        isActive: true,
+        lastLoginAt: true,
+        createdAt: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return user;
   }
 
   private async generateTokens(user: User): Promise<TokenPair> {

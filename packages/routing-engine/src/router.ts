@@ -33,7 +33,7 @@ export interface RouterConfig {
 }
 
 const DEFAULT_CONFIG: RouterConfig = {
-  defaultStrategy: 'PRIORITY',
+  defaultStrategy: 'priority',
   enableFallback: true,
   maxRetries: 2,
   healthCheckInterval: 30000,
@@ -57,12 +57,12 @@ export class Router {
 
     // Initialize strategies
     this.strategies = new Map([
-      ['PRIORITY', new PriorityStrategy()],
-      ['ROUND_ROBIN', new RoundRobinStrategy()],
-      ['LEAST_LATENCY', new LeastLatencyStrategy()],
-      ['LEAST_COST', new LeastCostStrategy()],
-      ['WEIGHTED', new WeightedStrategy()],
-      ['RANDOM', new RandomStrategy()],
+      ['priority', new PriorityStrategy()],
+      ['round_robin', new RoundRobinStrategy()],
+      ['least_latency', new LeastLatencyStrategy()],
+      ['least_cost', new LeastCostStrategy()],
+      ['weighted', new WeightedStrategy()],
+      ['random', new RandomStrategy()],
     ]);
   }
 
@@ -87,7 +87,8 @@ export class Router {
 
     // 4. Apply routing strategy
     const strategy = rule?.strategy || this.config.defaultStrategy;
-    const strategyImpl = this.strategies.get(strategy);
+    const normalizedStrategy = strategy.toLowerCase() as RoutingStrategy;
+    const strategyImpl = this.strategies.get(normalizedStrategy);
 
     if (!strategyImpl) {
       throw new Error(`Unknown routing strategy: ${strategy}`);
@@ -115,9 +116,9 @@ export class Router {
       providerType: selectedCandidate.providerType,
       modelId: selectedCandidate.modelId,
       apiKeyId: selectedCandidate.keyId,
-      strategy,
+      strategy: normalizedStrategy,
       ruleId: rule?.id,
-      reasoning: this.buildReasoning(selectedCandidate, strategy),
+      reasoning: this.buildReasoning(selectedCandidate, normalizedStrategy),
       alternatives,
     };
   }
@@ -147,7 +148,7 @@ export class Router {
     }
 
     // Use priority strategy for fallback
-    const strategyImpl = this.strategies.get('PRIORITY')!;
+    const strategyImpl = this.strategies.get('priority')!;
     const selectedCandidate = strategyImpl.select(availableCandidates, context, {
       roundRobinIndex: this.roundRobinIndex,
       providerHealth: this.providerHealth,
@@ -158,7 +159,7 @@ export class Router {
       providerType: selectedCandidate.providerType,
       modelId: selectedCandidate.modelId,
       apiKeyId: selectedCandidate.keyId,
-      strategy: 'PRIORITY',
+      strategy: 'priority',
       ruleId: rule?.id,
       reasoning: `Fallback after failure of providers: ${failedProviderIds.join(', ')}`,
       alternatives: [],

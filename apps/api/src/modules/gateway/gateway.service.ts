@@ -70,8 +70,6 @@ export class GatewayService {
       model: decision.modelId,
     };
 
-    const startTime = Date.now();
-
     try {
       if (stream) {
         return this.handleStreamRequest(
@@ -234,7 +232,7 @@ export class GatewayService {
         inputTokens,
         outputTokens,
         latencyMs,
-        cost: 0, // Calculate based on tokens
+        cost: this.estimateStreamCost(decision.providerType, inputTokens, outputTokens),
         status: 'SUCCESS',
         cached: false,
         streamMode: true,
@@ -391,6 +389,23 @@ export class GatewayService {
 
     // Simple estimation: ~4 chars per token
     return Math.ceil(text.length / 4);
+  }
+
+  private estimateStreamCost(
+    providerType: ProviderType,
+    inputTokens: number,
+    outputTokens: number,
+  ): number {
+    // Default cost rates per 1k tokens by provider
+    const costTable: Record<string, { input: number; output: number }> = {
+      openai: { input: 0.005, output: 0.015 },
+      anthropic: { input: 0.003, output: 0.015 },
+      gemini: { input: 0.00025, output: 0.0005 },
+      'openai-compatible': { input: 0, output: 0 },
+    };
+
+    const rates = costTable[providerType] || { input: 0, output: 0 };
+    return (inputTokens / 1000) * rates.input + (outputTokens / 1000) * rates.output;
   }
 
   async getAvailableModels(userId: string): Promise<any[]> {

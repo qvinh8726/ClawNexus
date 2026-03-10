@@ -43,7 +43,7 @@ export interface ProviderHealth {
 
 export interface KeyHealth {
   keyId: string;
-  providerId: string;
+  providerId?: string;
   healthy: boolean;
   usageCount: number;
   rateLimited: boolean;

@@ -126,7 +126,7 @@ export class GeminiProvider extends BaseProvider {
         };
       }
 
-      const data = await response.json();
+      const data = await response.json() as Record<string, unknown>;
       const completionResponse = this.transformResponse(data, request.model);
 
       const inputTokens = completionResponse.usage.promptTokens;
@@ -461,8 +461,8 @@ export class GeminiProvider extends BaseProvider {
 
   private async parseError(response: Response): Promise<ProviderError> {
     try {
-      const data = await response.json();
-      const error = data.error || {};
+      const data = await response.json() as Record<string, unknown>;
+      const error = (data.error || {}) as Record<string, unknown>;
 
       const isRateLimited = response.status === 429;
       const retryAfter = isRateLimited
@@ -470,8 +470,8 @@ export class GeminiProvider extends BaseProvider {
         : undefined;
 
       return {
-        code: error.code || `HTTP_${response.status}`,
-        message: error.message || response.statusText,
+        code: (error.code as string) || `HTTP_${response.status}`,
+        message: (error.message as string) || response.statusText,
         statusCode: response.status,
         isRetryable: response.status >= 500 || isRateLimited,
         isRateLimited,

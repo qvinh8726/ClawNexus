@@ -107,7 +107,7 @@ export class ProvidersService {
       config?: Record<string, unknown>;
     },
   ) {
-    const provider = await this.findById(id, userId);
+    await this.findById(id, userId);
 
     return this.prisma.provider.update({
       where: { id },

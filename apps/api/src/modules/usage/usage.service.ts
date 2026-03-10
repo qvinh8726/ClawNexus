@@ -30,17 +30,16 @@ export class UsageService {
       this.prisma.requestLog.aggregate({
         where: {
           userId,
-          createdAt: { gte: startDate },
+          timestamp: { gte: startDate },
         },
         _count: true,
         _sum: {
           inputTokens: true,
           outputTokens: true,
           cost: true,
-          totalDuration: true,
         },
         _avg: {
-          latency: true,
+          latencyMs: true,
         },
       }),
 
@@ -48,9 +47,9 @@ export class UsageService {
       this.prisma.usageMetric.findMany({
         where: {
           userId,
-          date: { gte: startDate },
+          periodStart: { gte: startDate },
         },
-        orderBy: { date: 'asc' },
+        orderBy: { periodStart: 'asc' },
       }),
 
       // Provider stats
@@ -58,7 +57,7 @@ export class UsageService {
         by: ['providerId'],
         where: {
           userId,
-          createdAt: { gte: startDate },
+          timestamp: { gte: startDate },
         },
         _count: true,
         _sum: {
@@ -77,7 +76,7 @@ export class UsageService {
         totalTokens:
           (requests._sum.inputTokens || 0) + (requests._sum.outputTokens || 0),
         totalCost: requests._sum.cost || 0,
-        averageLatency: Math.round(requests._avg.latency || 0),
+        averageLatency: Math.round(requests._avg.latencyMs || 0),
         successRate,
       },
       metrics,
@@ -106,9 +105,9 @@ export class UsageService {
     if (model) where.model = model;
     if (status) where.status = status;
     if (startDate || endDate) {
-      where.createdAt = {};
-      if (startDate) where.createdAt.gte = startDate;
-      if (endDate) where.createdAt.lte = endDate;
+      where.timestamp = {};
+      if (startDate) where.timestamp.gte = startDate;
+      if (endDate) where.timestamp.lte = endDate;
     }
 
     const [logs, total] = await Promise.all([
@@ -116,7 +115,7 @@ export class UsageService {
         where,
         skip,
         take: limit,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { timestamp: 'desc' },
         include: {
           provider: {
             select: { name: true, type: true },
@@ -155,7 +154,7 @@ export class UsageService {
       by: ['model'],
       where: {
         userId,
-        createdAt: { gte: startDate },
+        timestamp: { gte: startDate },
       },
       _count: true,
       _sum: {
@@ -164,7 +163,7 @@ export class UsageService {
         outputTokens: true,
       },
       _avg: {
-        latency: true,
+        latencyMs: true,
       },
     });
   }
@@ -186,20 +185,20 @@ export class UsageService {
     const [byProvider, byModel, dailyCosts] = await Promise.all([
       this.prisma.requestLog.groupBy({
         by: ['providerId'],
-        where: { userId, createdAt: { gte: startDate } },
+        where: { userId, timestamp: { gte: startDate } },
         _sum: { cost: true },
       }),
 
       this.prisma.requestLog.groupBy({
         by: ['model'],
-        where: { userId, createdAt: { gte: startDate } },
+        where: { userId, timestamp: { gte: startDate } },
         _sum: { cost: true },
       }),
 
       this.prisma.usageMetric.findMany({
-        where: { userId, date: { gte: startDate } },
-        select: { date: true, totalCost: true },
-        orderBy: { date: 'asc' },
+        where: { userId, periodStart: { gte: startDate } },
+        select: { periodStart: true, totalCost: true },
+        orderBy: { periodStart: 'asc' },
       }),
     ]);
 
@@ -208,7 +207,7 @@ export class UsageService {
 
   private async getSuccessRate(userId: string, startDate: Date): Promise<number> {
     const total = await this.prisma.requestLog.count({
-      where: { userId, createdAt: { gte: startDate } },
+      where: { userId, timestamp: { gte: startDate } },
     });
 
     if (total === 0) return 100;
@@ -216,7 +215,7 @@ export class UsageService {
     const successful = await this.prisma.requestLog.count({
       where: {
         userId,
-        createdAt: { gte: startDate },
+        timestamp: { gte: startDate },
         status: 'SUCCESS',
       },
     });

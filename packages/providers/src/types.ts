@@ -3,7 +3,6 @@
  */
 
 import type {
-  ChatCompletionRequest,
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,

@@ -5,14 +5,7 @@
 
 import type { PrismaClient, ProviderKey } from '@clawai/database';
 import { decryptApiKey } from '@clawai/database';
-
-export interface KeyHealth {
-  keyId: string;
-  healthy: boolean;
-  usageCount: number;
-  rateLimited: boolean;
-  rateLimitResetAt?: Date;
-}
+import type { KeyHealth } from './types.js';
 
 export class KeyManager {
   private keyHealthCache: Map<string, KeyHealth> = new Map();

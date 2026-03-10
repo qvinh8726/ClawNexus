@@ -18,8 +18,8 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ProviderType, ProviderStatus, KeyStatus } from '@clawai/database';
 
 class CreateProviderDto {
-  name: string;
-  type: ProviderType;
+  name!: string;
+  type!: ProviderType;
   baseUrl?: string;
   isDefault?: boolean;
   config?: Record<string, unknown>;
@@ -34,8 +34,8 @@ class UpdateProviderDto {
 }
 
 class AddKeyDto {
-  keyAlias: string;
-  apiKey: string;
+  keyAlias!: string;
+  apiKey!: string;
   dailyLimit?: number;
   monthlyLimit?: number;
 }

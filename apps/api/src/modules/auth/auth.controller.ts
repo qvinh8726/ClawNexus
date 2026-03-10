@@ -20,20 +20,20 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 class LoginDto {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(6)
-  password: string;
+  password!: string;
 }
 
 class RegisterDto {
   @IsEmail()
-  email: string;
+  email!: string;
 
   @IsString()
   @MinLength(6)
-  password: string;
+  password!: string;
 
   @IsString()
   @IsOptional()
@@ -42,7 +42,7 @@ class RegisterDto {
 
 class RefreshTokenDto {
   @IsString()
-  refreshToken: string;
+  refreshToken!: string;
 }
 
 @ApiTags('auth')
@@ -85,7 +85,8 @@ export class AuthController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get current user info' })
   async me(@Request() req: any) {
-    return req.user;
+    const user = await this.authService.getProfile(req.user.userId);
+    return user;
   }
 
   @Post('regenerate-api-key')
