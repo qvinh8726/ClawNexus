@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - API Key Guard
+ * ClawNexus - API Key Guard
  */
 
 import { Injectable, ExecutionContext } from '@nestjs/common';

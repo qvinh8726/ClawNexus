@@ -1,4 +1,4 @@
-# ClawAI Gateway
+# ClawNexus
 
 A unified API gateway for AI models with multi-provider routing, smart model selection, cost tracking, and a web dashboard.
 
@@ -17,7 +17,7 @@ A unified API gateway for AI models with multi-provider routing, smart model sel
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     ClawAI Gateway                          │
+│                       ClawNexus                            │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    │
@@ -59,8 +59,8 @@ A unified API gateway for AI models with multi-provider routing, smart model sel
 1. **Clone and install dependencies**
 
 ```bash
-git clone https://github.com/yourusername/clawai-gateway.git
-cd clawai-gateway
+git clone https://github.com/qvinh8726/ClawNexus.git
+cd ClawNexus
 npm install
 ```
 
@@ -91,8 +91,8 @@ npm run db:seed
 npm run dev
 
 # Or start individually
-npm run dev --workspace=@clawai/api   # API on port 3001
-npm run dev --workspace=@clawai/web   # Web on port 3000
+npm run dev --workspace=@clawnexus/api   # API on port 3001
+npm run dev --workspace=@clawnexus/web   # Web on port 3000
 ```
 
 ### Docker Deployment
@@ -148,7 +148,7 @@ curl http://localhost:3001/v1/chat/completions \
 ## Project Structure
 
 ```
-clawai-gateway/
+clawnexus/
 ├── apps/
 │   ├── api/                 # NestJS backend
 │   │   └── src/

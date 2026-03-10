@@ -1,10 +1,10 @@
 /**
- * ClawAI Gateway - Smart Router
+ * ClawNexus - Smart Router
  * Main routing engine that decides which provider/model to use
  */
 
-import type { ProviderType, RoutingStrategy } from '@clawai/shared-types';
-import type { PrismaClient } from '@clawai/database';
+import type { ProviderType, RoutingStrategy } from '@clawnexus/shared-types';
+import type { PrismaClient } from '@clawnexus/database';
 
 import {
   RoutingContext,

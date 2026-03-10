@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Provider Factory
+ * ClawNexus - Provider Factory
  * Factory for creating provider instances
  */
 
-import type { ProviderType } from '@clawai/shared-types';
+import type { ProviderType } from '@clawnexus/shared-types';
 import { BaseProvider } from './base-provider.js';
 import { OpenAIProvider } from './openai-provider.js';
 import { AnthropicProvider } from './anthropic-provider.js';

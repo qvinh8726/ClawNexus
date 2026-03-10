@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Routing Strategy Interface
+ * ClawNexus - Routing Strategy Interface
  */
 
 import type { RouteCandidate, RoutingContext, ProviderHealth } from '../types.js';

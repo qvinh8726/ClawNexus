@@ -1,12 +1,12 @@
 /**
- * ClawAI Gateway - Base Provider
+ * ClawNexus - Base Provider
  * Abstract base class for all AI providers
  */
 
 import type {
   ChatCompletionRequest,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 import type {
   ProviderConfig,

@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Shared Types
+ * ClawNexus - Shared Types
  * Core type definitions used across the entire platform
  */
 

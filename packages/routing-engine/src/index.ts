@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Routing Engine Package
+ * ClawNexus - Routing Engine Package
  */
 
 export * from './router.js';

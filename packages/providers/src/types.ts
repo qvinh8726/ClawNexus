@@ -1,12 +1,12 @@
 /**
- * ClawAI Gateway - Provider Types
+ * ClawNexus - Provider Types
  */
 
 import type {
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 export interface ProviderConfig {
   apiKey: string;

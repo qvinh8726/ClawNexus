@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - OpenAI Provider
+ * ClawNexus - OpenAI Provider
  * Provider implementation for OpenAI API
  */
 
@@ -8,7 +8,7 @@ import type {
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 import { BaseProvider } from './base-provider.js';
 import type {

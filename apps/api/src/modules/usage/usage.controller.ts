@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Usage Controller
+ * ClawNexus - Usage Controller
  */
 
 import {

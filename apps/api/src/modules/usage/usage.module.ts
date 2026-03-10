@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Usage Module
+ * ClawNexus - Usage Module
  */
 
 import { Module } from '@nestjs/common';

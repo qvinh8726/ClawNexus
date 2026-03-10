@@ -1,5 +1,5 @@
 {
-  "name": "@clawai/database",
+  "name": "@clawnexus/database",
   "version": "1.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -31,7 +31,7 @@
     "@prisma/client": "^5.9.0"
   },
   "devDependencies": {
-    "@clawai/shared-types": "*",
+    "@clawnexus/shared-types": "*",
     "prisma": "^5.9.0",
     "rimraf": "^5.0.5",
     "ts-node": "^10.9.2",

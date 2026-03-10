@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Anthropic Provider
+ * ClawNexus - Anthropic Provider
  * Provider implementation for Anthropic Claude API
  */
 
@@ -8,7 +8,7 @@ import type {
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 import { BaseProvider } from './base-provider.js';
 import type {

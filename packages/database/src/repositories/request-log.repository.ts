@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Request Log Repository
+ * ClawNexus - Request Log Repository
  */
 
 import { PrismaClient, RequestLog, RequestStatus, Prisma } from '@prisma/client';

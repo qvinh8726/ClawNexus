@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Routing Service
+ * ClawNexus - Routing Service
  */
 
 import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaClient } from '@clawai/database';
+import { PrismaClient } from '@clawnexus/database';
 
 @Injectable()
 export class RoutingService {

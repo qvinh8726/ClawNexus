@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Health Controller
+ * ClawNexus - Health Controller
  */
 
 import { Controller, Get, Inject } from '@nestjs/common';
-import { PrismaClient } from '@clawai/database';
+import { PrismaClient } from '@clawnexus/database';
 
 @Controller('health')
 export class HealthController {

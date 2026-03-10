@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Providers Controller
+ * ClawNexus - Providers Controller
  */
 
 import {
@@ -15,7 +15,7 @@ import {
 } from '@nestjs/common';
 import { ProvidersService } from './providers.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { ProviderType, ProviderStatus, KeyStatus } from '@clawai/database';
+import { ProviderType, ProviderStatus, KeyStatus } from '@clawnexus/database';
 
 class CreateProviderDto {
   name!: string;

@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - JWT Auth Guard
+ * ClawNexus - JWT Auth Guard
  */
 
 import { Injectable, ExecutionContext } from '@nestjs/common';

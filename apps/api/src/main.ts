@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - API Entry Point
+ * ClawNexus - API Entry Point
  */
 
 import { NestFactory } from '@nestjs/core';
@@ -38,7 +38,7 @@ async function bootstrap() {
 
   // Swagger documentation
   const config = new DocumentBuilder()
-    .setTitle('ClawAI Gateway API')
+    .setTitle('ClawNexus API')
     .setDescription('Unified AI Gateway - Multi-provider AI routing platform')
     .setVersion('1.0')
     .addBearerAuth()
@@ -53,7 +53,7 @@ async function bootstrap() {
 
   await app.listen(port, host);
 
-  logger.log(`🚀 ClawAI Gateway API running on http://${host}:${port}`);
+  logger.log(`🚀 ClawNexus API running on http://${host}:${port}`);
   logger.log(`📚 API Documentation available at http://${host}:${port}/docs`);
 }
 

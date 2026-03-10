@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Routing Controller
+ * ClawNexus - Routing Controller
  */
 
 import {

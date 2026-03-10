@@ -46,7 +46,7 @@ export default function DashboardLayout({
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground text-sm font-bold">
               C
             </div>
-            <span className="font-semibold">ClawAI Gateway</span>
+            <span className="font-semibold">ClawNexus</span>
           </Link>
         </div>
 

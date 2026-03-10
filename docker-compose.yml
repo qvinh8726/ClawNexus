@@ -4,17 +4,17 @@ services:
   # PostgreSQL Database
   postgres:
     image: postgres:16-alpine
-    container_name: clawai-postgres
+    container_name: clawnexus-postgres
     environment:
-      POSTGRES_USER: ${DB_USER:-clawai}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-clawai_secret}
-      POSTGRES_DB: ${DB_NAME:-clawai}
+      POSTGRES_USER: ${DB_USER:-clawnexus}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-clawnexus_secret}
+      POSTGRES_DB: ${DB_NAME:-clawnexus}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-clawai}']
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-clawnexus}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -22,7 +22,7 @@ services:
   # Redis Cache
   redis:
     image: redis:7-alpine
-    container_name: clawai-redis
+    container_name: clawnexus-redis
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
@@ -39,11 +39,11 @@ services:
     build:
       context: .
       dockerfile: apps/api/Dockerfile
-    container_name: clawai-api
+    container_name: clawnexus-api
     environment:
       - NODE_ENV=production
       - PORT=3001
-      - DATABASE_URL=postgresql://${DB_USER:-clawai}:${DB_PASSWORD:-clawai_secret}@postgres:5432/${DB_NAME:-clawai}
+      - DATABASE_URL=postgresql://${DB_USER:-clawnexus}:${DB_PASSWORD:-clawnexus_secret}@postgres:5432/${DB_NAME:-clawnexus}
       - REDIS_URL=redis://redis:6379
       - JWT_SECRET=${JWT_SECRET:-your-super-secret-jwt-key}
       - ENCRYPTION_KEY=${ENCRYPTION_KEY:-your-32-byte-encryption-key-here}
@@ -61,7 +61,7 @@ services:
     build:
       context: .
       dockerfile: apps/web/Dockerfile
-    container_name: clawai-web
+    container_name: clawnexus-web
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_API_URL=http://api:3001

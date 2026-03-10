@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Auth Module
+ * ClawNexus - Auth Module
  */
 
 import { Module } from '@nestjs/common';
@@ -20,7 +20,7 @@ import { ApiKeyGuard } from './guards/api-key.guard';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        secret: config.get('JWT_SECRET', 'clawai-secret-key'),
+        secret: config.get('JWT_SECRET', 'clawnexus-secret-key'),
         signOptions: {
           expiresIn: config.get('JWT_EXPIRES_IN', '7d'),
         },

@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Gateway Module
+ * ClawNexus - Gateway Module
  * Handles the unified AI API endpoints
  */
 

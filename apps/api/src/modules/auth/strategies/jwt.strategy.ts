@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - JWT Strategy
+ * ClawNexus - JWT Strategy
  */
 
 import { Injectable } from '@nestjs/common';
@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: config.get('JWT_SECRET', 'clawai-secret-key'),
+      secretOrKey: config.get('JWT_SECRET', 'clawnexus-secret-key'),
     });
   }
 

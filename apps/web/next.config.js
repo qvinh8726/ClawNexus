@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  transpilePackages: ['@clawai/shared-types'],
+  transpilePackages: ['@clawnexus/shared-types'],
   output: 'standalone',
   async rewrites() {
     return [

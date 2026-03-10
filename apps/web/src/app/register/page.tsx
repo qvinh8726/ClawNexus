@@ -40,7 +40,7 @@ export default function RegisterPage() {
             C
           </div>
           <CardTitle className="text-2xl">Create an account</CardTitle>
-          <CardDescription>Get started with ClawAI Gateway</CardDescription>
+          <CardDescription>Get started with ClawNexus</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

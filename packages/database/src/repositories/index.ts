@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Repository Exports
+ * ClawNexus - Repository Exports
  */
 
 export * from './user.repository.js';

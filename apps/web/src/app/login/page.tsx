@@ -39,7 +39,7 @@ export default function LoginPage() {
             C
           </div>
           <CardTitle className="text-2xl">Welcome back</CardTitle>
-          <CardDescription>Sign in to ClawAI Gateway</CardDescription>
+          <CardDescription>Sign in to ClawNexus</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

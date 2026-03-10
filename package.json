@@ -1,13 +1,13 @@
 {
-  "name": "clawai-gateway",
+  "name": "clawnexus",
   "version": "1.0.0",
   "private": true,
-  "description": "Unified AI Gateway - Multi-provider AI routing platform with dashboard",
-  "author": "ClawAI Team",
+  "description": "ClawNexus - Unified AI Gateway with multi-provider routing and dashboard",
+  "author": "ClawNexus Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/clawai/gateway.git"
+    "url": "https://github.com/qvinh8726/ClawNexus.git"
   },
   "keywords": [
     "ai",

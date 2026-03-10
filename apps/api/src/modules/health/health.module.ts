@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Health Module
+ * ClawNexus - Health Module
  */
 
 import { Module } from '@nestjs/common';

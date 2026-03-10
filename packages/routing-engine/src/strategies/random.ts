@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Random Strategy
+ * ClawNexus - Random Strategy
  * Selects a random provider from the available candidates
  */
 

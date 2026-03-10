@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Database Package
+ * ClawNexus - Database Package
  * Exports database client, types, and utilities
  */
 

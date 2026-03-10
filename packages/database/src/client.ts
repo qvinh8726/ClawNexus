@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Database Client
+ * ClawNexus - Database Client
  * Singleton Prisma client instance
  */
 

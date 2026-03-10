@@ -1,4 +1,4 @@
-// ClawAI Gateway - Database Schema
+// ClawNexus - Database Schema
 // Production-grade Prisma schema for AI Gateway platform
 
 generator client {

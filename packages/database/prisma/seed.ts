@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Database Seed
+ * ClawNexus - Database Seed
  * Seeds the database with initial data for development
  */
 
@@ -148,18 +148,18 @@ async function main() {
 
   // Create default admin user
   console.log('\n👤 Creating default admin user...');
-  const passwordHash = hashPassword('admin123', 'clawai-salt', 32).toString('hex');
+  const passwordHash = hashPassword('admin123', 'clawnexus-salt', 32).toString('hex');
 
   const adminUser = await prisma.user.upsert({
-    where: { email: 'admin@clawai.local' },
+    where: { email: 'admin@clawnexus.local' },
     update: {},
     create: {
-      email: 'admin@clawai.local',
+      email: 'admin@clawnexus.local',
       passwordHash,
       name: 'Admin',
       role: 'ADMIN',
       apiKey: 'claw_admin_dev_key_12345',
-      apiKeyHash: hashPassword('claw_admin_dev_key_12345', 'clawai-salt', 32).toString('hex'),
+      apiKeyHash: hashPassword('claw_admin_dev_key_12345', 'clawnexus-salt', 32).toString('hex'),
     },
   });
   console.log(`  ✓ Admin user created: ${adminUser.email}`);
@@ -198,7 +198,7 @@ async function main() {
 
   console.log('\n✅ Database seed completed!\n');
   console.log('Default credentials:');
-  console.log('  Email: admin@clawai.local');
+  console.log('  Email: admin@clawnexus.local');
   console.log('  Password: admin123');
   console.log('  API Key: claw_admin_dev_key_12345\n');
 }

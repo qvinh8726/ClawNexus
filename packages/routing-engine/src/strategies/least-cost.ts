@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Least Cost Strategy
+ * ClawNexus - Least Cost Strategy
  * Selects the provider with the lowest cost
  */
 

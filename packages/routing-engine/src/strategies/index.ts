@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Routing Strategies
+ * ClawNexus - Routing Strategies
  */
 
 export * from './interface.js';

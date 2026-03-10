@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Priority Strategy
+ * ClawNexus - Priority Strategy
  * Selects the provider with the highest priority (lowest priority number)
  */
 

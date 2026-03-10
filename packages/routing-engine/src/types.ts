@@ -1,8 +1,8 @@
 /**
- * ClawAI Gateway - Routing Engine Types
+ * ClawNexus - Routing Engine Types
  */
 
-import type { ProviderType, RoutingStrategy } from '@clawai/shared-types';
+import type { ProviderType, RoutingStrategy } from '@clawnexus/shared-types';
 
 export interface RoutingContext {
   userId: string;

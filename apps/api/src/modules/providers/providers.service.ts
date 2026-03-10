@@ -1,10 +1,10 @@
 /**
- * ClawAI Gateway - Providers Service
+ * ClawNexus - Providers Service
  */
 
 import { Injectable, Inject, NotFoundException, BadRequestException } from '@nestjs/common';
-import { PrismaClient, ProviderType, ProviderStatus, KeyStatus } from '@clawai/database';
-import { encryptApiKey, extractKeyPrefix } from '@clawai/database';
+import { PrismaClient, ProviderType, ProviderStatus, KeyStatus } from '@clawnexus/database';
+import { encryptApiKey, extractKeyPrefix } from '@clawnexus/database';
 
 @Injectable()
 export class ProvidersService {

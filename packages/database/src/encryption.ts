@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - API Key Encryption
+ * ClawNexus - API Key Encryption
  * Secure encryption/decryption for API keys using AES-256-GCM
  */
 
@@ -101,6 +101,6 @@ export function generateApiKey(prefix = 'claw'): string {
  * Hashes an API key for secure storage and lookup
  */
 export function hashApiKey(apiKey: string): string {
-  const hash = scryptSync(apiKey, 'clawai-salt', 32);
+  const hash = scryptSync(apiKey, 'clawnexus-salt', 32);
   return hash.toString('hex');
 }

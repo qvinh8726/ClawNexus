@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Gateway Controller
+ * ClawNexus - Gateway Controller
  * OpenAI-compatible API endpoints
  */
 

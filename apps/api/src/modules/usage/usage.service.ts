@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Usage Service
+ * ClawNexus - Usage Service
  */
 
 import { Injectable, Inject } from '@nestjs/common';
-import { PrismaClient } from '@clawai/database';
+import { PrismaClient } from '@clawnexus/database';
 
 @Injectable()
 export class UsageService {

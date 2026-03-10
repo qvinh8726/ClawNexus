@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Database Module
+ * ClawNexus - Database Module
  */
 
 import { Global, Module, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@clawai/database';
+import { PrismaClient } from '@clawnexus/database';
 
 @Global()
 @Module({

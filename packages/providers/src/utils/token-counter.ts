@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Token Counter
+ * ClawNexus - Token Counter
  * Simple token estimation without external dependencies
  */
 

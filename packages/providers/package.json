@@ -1,5 +1,5 @@
 {
-  "name": "@clawai/providers",
+  "name": "@clawnexus/providers",
   "version": "1.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -18,7 +18,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@clawai/shared-types": "*",
+    "@clawnexus/shared-types": "*",
     "eventsource-parser": "^1.1.2"
   },
   "devDependencies": {

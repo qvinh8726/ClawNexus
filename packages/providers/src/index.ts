@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Provider Package
+ * ClawNexus - Provider Package
  * Export all providers and utilities
  */
 

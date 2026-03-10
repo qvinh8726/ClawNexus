@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Provider Utilities
+ * ClawNexus - Provider Utilities
  */
 
 export * from './sse-parser.js';

@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - SSE Stream Parser
+ * ClawNexus - SSE Stream Parser
  * Parses Server-Sent Events streams
  */
 

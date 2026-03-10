@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Routing Module
+ * ClawNexus - Routing Module
  */
 
 import { Module } from '@nestjs/common';

@@ -1,11 +1,11 @@
 /**
- * ClawAI Gateway - API Key Strategy
+ * ClawNexus - API Key Strategy
  */
 
 import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-custom';
-import { PrismaClient } from '@clawai/database';
+import { PrismaClient } from '@clawnexus/database';
 import { Request } from 'express';
 
 @Injectable()

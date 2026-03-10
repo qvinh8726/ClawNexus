@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Providers Module
+ * ClawNexus - Providers Module
  * Provider management endpoints
  */
 

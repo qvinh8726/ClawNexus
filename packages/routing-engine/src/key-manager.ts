@@ -1,10 +1,10 @@
 /**
- * ClawAI Gateway - API Key Manager
+ * ClawNexus - API Key Manager
  * Manages API key rotation, rate limiting, and health tracking
  */
 
-import type { PrismaClient, ProviderKey } from '@clawai/database';
-import { decryptApiKey } from '@clawai/database';
+import type { PrismaClient, ProviderKey } from '@clawnexus/database';
+import { decryptApiKey } from '@clawnexus/database';
 import type { KeyHealth } from './types.js';
 
 export class KeyManager {

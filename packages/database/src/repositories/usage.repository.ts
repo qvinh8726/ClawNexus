@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Usage Repository
+ * ClawNexus - Usage Repository
  */
 
 import { PrismaClient, UsageMetric, MetricPeriod, Prisma } from '@prisma/client';

@@ -17,8 +17,8 @@ COPY apps/web ./apps/web
 
 # Build
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build --workspace=@clawai/shared-types
-RUN npm run build --workspace=@clawai/web
+RUN npm run build --workspace=@clawnexus/shared-types
+RUN npm run build --workspace=@clawnexus/web
 
 # Production stage
 FROM node:20-alpine AS runner

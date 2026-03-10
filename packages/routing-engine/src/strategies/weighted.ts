@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Weighted Strategy
+ * ClawNexus - Weighted Strategy
  * Selects providers based on their weights (probabilistic)
  */
 

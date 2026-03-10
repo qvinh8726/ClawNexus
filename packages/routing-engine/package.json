@@ -1,5 +1,5 @@
 {
-  "name": "@clawai/routing-engine",
+  "name": "@clawnexus/routing-engine",
   "version": "1.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -18,9 +18,9 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@clawai/shared-types": "*",
-    "@clawai/providers": "*",
-    "@clawai/database": "*"
+    "@clawnexus/shared-types": "*",
+    "@clawnexus/providers": "*",
+    "@clawnexus/database": "*"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

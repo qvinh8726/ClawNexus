@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Google Gemini Provider
+ * ClawNexus - Google Gemini Provider
  * Provider implementation for Google Gemini API
  */
 
@@ -8,7 +8,7 @@ import type {
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 import { BaseProvider } from './base-provider.js';
 import type {

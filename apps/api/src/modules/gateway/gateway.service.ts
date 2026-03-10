@@ -1,18 +1,18 @@
 /**
- * ClawAI Gateway - Gateway Service
+ * ClawNexus - Gateway Service
  * Core service for processing AI requests
  */
 
 import { Injectable, Inject, Logger, BadRequestException } from '@nestjs/common';
-import { PrismaClient } from '@clawai/database';
-import { ProviderFactory, BaseProvider } from '@clawai/providers';
-import { Router } from '@clawai/routing-engine';
+import { PrismaClient } from '@clawnexus/database';
+import { ProviderFactory, BaseProvider } from '@clawnexus/providers';
+import { Router } from '@clawnexus/routing-engine';
 import type {
   ChatCompletionRequest,
   ChatCompletionResponse,
   ChatCompletionChunk,
   ProviderType,
-} from '@clawai/shared-types';
+} from '@clawnexus/shared-types';
 
 export interface GatewayRequest extends ChatCompletionRequest {
   userId: string;
@@ -431,7 +431,7 @@ export class GatewayService {
         id: alias,
         object: 'model',
         created: Date.now(),
-        owned_by: 'clawai',
+        owned_by: 'clawnexus',
       });
     }
 

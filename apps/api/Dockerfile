@@ -25,11 +25,11 @@ COPY apps/api ./apps/api
 RUN npx prisma generate --schema=packages/database/prisma/schema.prisma
 
 # Build all packages
-RUN npm run build --workspace=@clawai/shared-types
-RUN npm run build --workspace=@clawai/database
-RUN npm run build --workspace=@clawai/providers
-RUN npm run build --workspace=@clawai/routing-engine
-RUN npm run build --workspace=@clawai/api
+RUN npm run build --workspace=@clawnexus/shared-types
+RUN npm run build --workspace=@clawnexus/database
+RUN npm run build --workspace=@clawnexus/providers
+RUN npm run build --workspace=@clawnexus/routing-engine
+RUN npm run build --workspace=@clawnexus/api
 
 # Production stage
 FROM node:20-alpine AS runner

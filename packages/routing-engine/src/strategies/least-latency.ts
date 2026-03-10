@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Least Latency Strategy
+ * ClawNexus - Least Latency Strategy
  * Selects the provider with the lowest latency
  */
 

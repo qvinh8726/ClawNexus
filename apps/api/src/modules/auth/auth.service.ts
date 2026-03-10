@@ -1,10 +1,10 @@
 /**
- * ClawAI Gateway - Auth Service
+ * ClawNexus - Auth Service
  */
 
 import { Injectable, Inject, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaClient, User } from '@clawai/database';
+import { PrismaClient, User } from '@clawnexus/database';
 import * as bcrypt from 'bcryptjs';
 import { randomBytes } from 'crypto';
 

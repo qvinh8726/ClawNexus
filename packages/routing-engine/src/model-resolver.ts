@@ -1,9 +1,9 @@
 /**
- * ClawAI Gateway - Model Resolver
+ * ClawNexus - Model Resolver
  * Resolves model aliases to actual provider/model combinations
  */
 
-import type { ProviderType } from '@clawai/shared-types';
+import type { ProviderType } from '@clawnexus/shared-types';
 import type { ModelAlias, ModelAliasTarget } from './types.js';
 
 export class ModelResolver {

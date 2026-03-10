@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - User Repository
+ * ClawNexus - User Repository
  */
 
 import { PrismaClient, User, UserRole, RefreshToken } from '@prisma/client';

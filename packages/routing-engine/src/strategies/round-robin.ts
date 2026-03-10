@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Round Robin Strategy
+ * ClawNexus - Round Robin Strategy
  * Distributes requests evenly across providers
  */
 

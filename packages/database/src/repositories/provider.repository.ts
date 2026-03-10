@@ -1,5 +1,5 @@
 /**
- * ClawAI Gateway - Provider Repository
+ * ClawNexus - Provider Repository
  */
 
 import {
